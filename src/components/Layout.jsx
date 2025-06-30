@@ -29,6 +29,7 @@ const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hasNotifications, setHasNotifications] = useState(true) // Simulating notifications
   const { user, signOut } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
@@ -208,9 +209,20 @@ const Layout = ({ children }) => {
 
                 {/* Notifications */}
                 {user && (
-                  <button className="relative p-2.5 text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <Bell className="w-5 h-5" />
-                    <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <button className={`relative p-2.5 rounded-xl transition-all duration-300 hover:scale-105 ${
+                    hasNotifications 
+                      ? 'text-orange-600 hover:text-orange-700 bg-orange-50 hover:bg-orange-100 shadow-lg border-2 border-orange-200' 
+                      : 'text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:shadow-lg'
+                  }`}>
+                    <Bell className={`w-5 h-5 ${hasNotifications ? 'animate-pulse' : ''}`} />
+                    {hasNotifications && (
+                      <>
+                        {/* Main notification dot */}
+                        <div className="absolute top-1.5 right-1.5 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white"></div>
+                        {/* Pulsing ring effect */}
+                        <div className="absolute top-1.5 right-1.5 w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
+                      </>
+                    )}
                   </button>
                 )}
 
