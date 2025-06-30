@@ -136,12 +136,39 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const resetPassword = async (email) => {
+    if (!isConfigured) {
+      return { 
+        data: null, 
+        error: { message: 'Supabase is not configured. Please set up your environment variables.' } 
+      }
+    }
+
+    try {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`
+      })
+      
+      if (error) {
+        console.error('Password reset error:', error)
+      } else {
+        console.log('Password reset email sent:', data)
+      }
+      
+      return { data, error }
+    } catch (error) {
+      console.error('Password reset exception:', error)
+      return { data: null, error: { message: error.message } }
+    }
+  }
+
   const value = {
     user,
     loading,
     signUp,
     signIn,
     signOut,
+    resetPassword,
     isConfigured
   }
 
