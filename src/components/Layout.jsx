@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { isGeminiConfigured } from '../lib/gemini'
+import SponsorBanner from './SponsorBanner'
 import { 
   Menu, 
   X, 
@@ -73,8 +74,11 @@ const Layout = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      {/* Sponsor Banner */}
+      <SponsorBanner />
+
       {/* Floating Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header className={`fixed top-8 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
           ? 'py-2' 
           : 'py-4'
@@ -208,10 +212,13 @@ const Layout = ({ children }) => {
 
                 {/* Notifications */}
                 {user && (
-                  <button className="relative p-2.5 text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <Link
+                    to="/notifications"
+                    className="relative p-2.5 text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
                     <Bell className="w-5 h-5" />
                     <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  </button>
+                  </Link>
                 )}
 
                 {/* User Menu */}
@@ -249,6 +256,13 @@ const Layout = ({ children }) => {
                         </div>
                         
                         <div className="py-2">
+                          <Link
+                            to="/notifications"
+                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                          >
+                            <Bell className="w-4 h-4" />
+                            <span>Notifications</span>
+                          </Link>
                           <button className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
                             <Settings className="w-4 h-4" />
                             <span>Account Settings</span>
@@ -353,7 +367,7 @@ const Layout = ({ children }) => {
       </header>
 
       {/* Main Content with proper top padding */}
-      <main className="pt-24">
+      <main className="pt-32">
         {children}
       </main>
 
@@ -429,9 +443,22 @@ const Layout = ({ children }) => {
           </div>
           
           <div className="mt-12 pt-8 border-t border-slate-200/50">
-            <p className="text-center text-sm text-slate-500">
-              © 2025 DrugLaunchIndia. All rights reserved.
-            </p>
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-center text-sm text-slate-500">
+                © 2025 DrugLaunchIndia. All rights reserved.
+              </p>
+              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                <span className="text-xs text-slate-400">Hackathon sponsors:</span>
+                <a
+                  href="/entri-redirect"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-purple-600 hover:text-purple-700 font-medium"
+                >
+                  Entri
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

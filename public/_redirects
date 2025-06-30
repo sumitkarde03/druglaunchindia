@@ -1,0 +1,21 @@
+# Netlify redirects configuration for IONOS domain with Entri sponsor redirect
+
+# Handle the Entri sponsor redirect
+/entri-redirect https://entri.app 302
+/sponsor https://entri.app 302
+
+# Main domain redirects (replace with your actual IONOS domain)
+# https://your-domain.com/* https://druglaunchindia.netlify.app/:splat 200
+
+# SPA fallback for React Router
+/*    /index.html   200
+
+# API redirects if needed
+/api/*  https://your-backend-api.com/api/:splat  200
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
