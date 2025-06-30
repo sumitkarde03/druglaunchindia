@@ -10,6 +10,7 @@ import Signup from './pages/Signup'
 import DrugDirectory from './pages/DrugDirectory'
 import MedicineSearch from './pages/MedicineSearch'
 import Regulations from './pages/Regulations'
+import Notifications from './pages/Notifications'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import FAQ from './pages/FAQ'
@@ -50,6 +51,11 @@ function App() {
                 <Route path="/regulations" element={
                   <ProtectedRoute>
                     <Regulations />
+                  </ProtectedRoute>
+                } />
+                <Route path="/notifications" element={
+                  <ProtectedRoute>
+                    <Notifications />
                   </ProtectedRoute>
                 } />
               </Routes>

@@ -57,6 +57,10 @@ const Layout = ({ children }) => {
     setIsUserMenuOpen(false)
   }
 
+  const handleNotificationClick = () => {
+    navigate('/notifications')
+  }
+
   const navigation = [
     { name: 'Home', href: '/', icon: Home, color: 'from-blue-500 to-cyan-500' },
     { name: 'AI Search', href: '/search', icon: Search, color: 'from-purple-500 to-pink-500', featured: true },
@@ -209,11 +213,14 @@ const Layout = ({ children }) => {
 
                 {/* Notifications */}
                 {user && (
-                  <button className={`relative p-2.5 rounded-xl transition-all duration-300 hover:scale-105 ${
-                    hasNotifications 
-                      ? 'text-orange-600 hover:text-orange-700 bg-orange-50 hover:bg-orange-100 shadow-lg border-2 border-orange-200' 
-                      : 'text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:shadow-lg'
-                  }`}>
+                  <button 
+                    onClick={handleNotificationClick}
+                    className={`relative p-2.5 rounded-xl transition-all duration-300 hover:scale-105 ${
+                      hasNotifications 
+                        ? 'text-orange-600 hover:text-orange-700 bg-orange-50 hover:bg-orange-100 shadow-lg border-2 border-orange-200' 
+                        : 'text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-cyan-500 hover:shadow-lg'
+                    }`}
+                  >
                     <Bell className={`w-5 h-5 ${hasNotifications ? 'animate-pulse' : ''}`} />
                     {hasNotifications && (
                       <>
@@ -261,6 +268,16 @@ const Layout = ({ children }) => {
                         </div>
                         
                         <div className="py-2">
+                          <Link
+                            to="/notifications"
+                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+                          >
+                            <Bell className="w-4 h-4" />
+                            <span>Notifications</span>
+                            {hasNotifications && (
+                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                            )}
+                          </Link>
                           <button className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
                             <Settings className="w-4 h-4" />
                             <span>Account Settings</span>
