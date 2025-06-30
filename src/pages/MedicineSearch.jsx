@@ -125,7 +125,7 @@ const MedicineSearch = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="w-full pl-14 pr-4 py-4 text-lg border border-slate-300 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white/80 backdrop-blur-sm"
+                  className="w-full pl-14 pr-4 py-4 text-lg font-semibold border border-slate-300 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white/80 backdrop-blur-sm"
                 />
               </div>
             </div>
